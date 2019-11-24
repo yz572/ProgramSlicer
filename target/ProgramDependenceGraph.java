@@ -131,14 +131,14 @@ public class ProgramDependenceGraph extends Analysis {
    	 Collection<Node> slice = getOutputNodes();
    	 List<Node> list = new ArrayList<Node>();
    	 for(Node n:slice) {
-   		 Set<Node> allslice = backwardSlice(n);
-   		 list.addAll(allslice);
+   		 Set<Node> ss = backwardSlice(n);
+   		 list.addAll(ss);
    	 }
    	Map<String, Integer> map = new HashMap<String,Integer>();
-   	 for(Node n : list) {
-   		 String m = n.toString();
-   		 Integer count = map.get(m);
-   		 map.put(m,(count == null)?1 : count +1);
+   	 for(Node a : list) {
+   		 String b = a.toString();
+   		 Integer count = map.get(b);
+   		 map.put(b,(count == null)?1 : count +1);
    	 }
    	 int count = 0;
    	 for(Map.Entry<String, Integer> entry: map.entrySet()) {

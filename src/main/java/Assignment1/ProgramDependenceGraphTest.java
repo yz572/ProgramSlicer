@@ -18,7 +18,7 @@ public class ProgramDependenceGraphTest {
 	 * This is a sample test to check the results of your implementation. You can
 	 * modify it to suit your taste
 	 */
-	Graph graph;
+	static Graph graph;
 	ProgramDependenceGraph pdg;
 
 	public ProgramDependenceGraphTest(String classPath) {
@@ -39,10 +39,12 @@ public class ProgramDependenceGraphTest {
 					pdg = new ProgramDependenceGraph(cn, mn);
 					graph = pdg.computeResult();
 					Set<Node> nodeList = graph.getNodes();
+					Set<Node> preds = new HashSet<Node>();
 					List<Node> list = new ArrayList<Node>(nodeList); 
 					Node n = list.get(list.size()/2); // For example, let us get the backward slice of the middle Node
-					System.out.println(cn.name + ", " + mn.name + ", " + testTightness() + ", " + testOverlap() + ", " + testBackwardSlice(n));
-					//System.out.println(graph); // this prints the digraph
+					System.out.println(cn.name + ", " + mn.name + ", " + testTightness() + ", " + testOverlap() + ", " + testBackwardSlice(n, preds));
+			        System.out.println(graph); // this prints the digraph
+				
 				}
 				in.close();
 			}
@@ -55,8 +57,8 @@ public class ProgramDependenceGraphTest {
 
 	}
 
-	private Set<Node> testBackwardSlice(Node n) {
-		return pdg.backwardSlice(n);
+	private Set<Node> testBackwardSlice(Node n,Set<Node> done) {
+		return pdg.backwardSlice(n/*, done*/);
 	}
 
 	private double testTightness() {
@@ -69,12 +71,12 @@ public class ProgramDependenceGraphTest {
 
 	public static void main(String[] args) throws IOException {
 		// Set the path to point to the class you want to test
-		String path = "../assignment-1-zabdulz/bin/net/sf/freecol/tools/";
+		String path = "../assignment-1-yz572/bin/net/sf/freecol/tools/";
 		
 		//print the header to the CSV file
 		System.out.println("ClassName, MethodName, Tighness, Overlap, BackWardSlice");
 		
 		ProgramDependenceGraphTest pgdt = new ProgramDependenceGraphTest(path);
-	}
+	
 
-}
+}}
